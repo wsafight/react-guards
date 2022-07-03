@@ -1,7 +1,6 @@
 import React, {
   Component,
   ComponentClass,
-  Fragment,
   FunctionComponent
 } from 'react';
 import { checkAuthority, CheckAuthorityParams } from './checkAuthority';
@@ -29,9 +28,8 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
   }
 
   checkThenRender = () => {
-    const { authority, allAuthority } = this.props;
-    checkAuthority({ authority, allAuthority }).then(res => {
-      console.log('res', res)
+    const { authority, allAuthority } = this.props
+    checkAuthority({ authority, allAuthority }).then((res: boolean) => {
       this.setState({ status: res ? 'success' : 'fail' })
     })
   }
@@ -52,15 +50,7 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
       return null
     }
 
-    if (typeof children === 'string') {
-      return children;
-    }
-
-    return (
-      <Fragment>
-        {children}
-      </Fragment>
-    )
+    return children
   }
 }
 
