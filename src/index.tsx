@@ -1,15 +1,73 @@
-import React, { FC, HTMLAttributes, ReactChild } from 'react';
+import React, {
+  Component,
+  ComponentClass,
+  Fragment,
+  FunctionComponent
+} from 'react';
+import { checkAuthority, CheckAuthorityParams } from './checkAuthority';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
-  /** custom content, defaults to 'the snozzberries taste like snozzberries' */
-  children?: ReactChild;
+type ReactComponent = ComponentClass | FunctionComponent
+
+interface ReactGuardsProps extends CheckAuthorityParams {
+  errComponent?: ReactComponent
+  loadingComponent?: ReactComponent
+  children?: any
 }
 
-// Please do not use types off of a default export module or else Storybook Docs will suffer.
-// see: https://github.com/storybookjs/storybook/issues/9556
-/**
- * A custom Thing component. Neat!
- */
-export const Thing: FC<Props> = ({ children }) => {
-  return <div>{children || `the snozzberries taste like snozzberries`}</div>;
-};
+interface ReactGuardsState {
+  status: 'loading' | 'success' | 'fail'
+}
+
+class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
+
+  state: Readonly<ReactGuardsState> = {
+    status: 'loading'
+  }
+
+  componentDidMount() {
+    this.checkThenRender()
+  }
+
+  checkThenRender = () => {
+    const { authority, allAuthority } = this.props;
+    checkAuthority({ authority, allAuthority }).then(res => {
+      console.log('res', res)
+      this.setState({ status: res ? 'success' : 'fail' })
+    })
+  }
+
+  render(): React.ReactNode {
+    const { children, loadingComponent: LoadComponent, errComponent: ErrorComponent } = this.props
+    const { status } = this.state
+
+    if (status === 'loading') {
+      return LoadComponent ? <LoadComponent /> : null
+    }
+
+    if (status === 'fail') {
+      return ErrorComponent ? <ErrorComponent /> : null
+    }
+
+    if (!children) {
+      return null
+    }
+
+    if (typeof children === 'string') {
+      return children;
+    }
+
+    return (
+      <Fragment>
+        {children}
+      </Fragment>
+    )
+  }
+}
+
+export {
+  ReactGuards,
+  checkAuthority,
+  ReactGuardsProps,
+}
+
+export default ReactGuards
