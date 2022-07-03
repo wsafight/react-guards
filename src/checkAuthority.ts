@@ -4,7 +4,7 @@ export type IAuthority =
   undefined |
   string |
   Promise<boolean> |
-  ((authority: string | string[] | undefined) => IAuthority)
+  ((authority?: string | string[]) => IAuthority)
 
 export interface CheckAuthorityParams {
   authority?: IAuthority
