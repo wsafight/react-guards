@@ -30,7 +30,7 @@ yarn add react-guards
 ```jsx
 import {ReactGuards} from 'react-guards'
 
-// 不传递任何数据，展示子组件
+// 不传递任何数据，展示组件
 <ReactGuards>
     213
     <div>324</div>
@@ -68,7 +68,7 @@ import {ReactGuards} from 'react-guards'
 </ReactGuards>
 
 // 不展示
-<ReactGuards target={Promise.resolve(true)} has='22,213'>
+<ReactGuards target={Promise.resolve(false)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>

@@ -34,7 +34,7 @@ yarn add react-guards
 ```jsx
 import {ReactGuards} from 'react-guards'
 
-// Show child components without passing any data
+// Show components without passing any data
 <ReactGuards>
     213
     <div>324</div>
@@ -66,6 +66,13 @@ import {ReactGuards} from 'react-guards'
 
 // show
 <ReactGuards target='213' has={['22', '213']}>
+    213
+    <div>324</div>
+    <button onClick={() => alert(0)}>213213</button>
+</ReactGuards>
+
+// none
+<ReactGuards target={Promise.resolve(false)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
