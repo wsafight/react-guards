@@ -18,7 +18,6 @@ interface ReactGuardsState {
 }
 
 class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
-
   state: Readonly<ReactGuardsState> = {
     status: 'loading'
   }
@@ -31,6 +30,8 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
     const { authority, allAuthority } = this.props
     checkAuthority({ authority, allAuthority }).then((res: boolean) => {
       this.setState({ status: res ? 'success' : 'fail' })
+    }).catch(() => {
+      this.setState({ status: 'fail' })
     })
   }
 
@@ -44,10 +45,6 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
 
     if (status === 'fail') {
       return ErrorComponent ? <ErrorComponent /> : null
-    }
-
-    if (!children) {
-      return null
     }
 
     return children
