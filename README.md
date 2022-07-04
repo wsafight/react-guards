@@ -11,8 +11,8 @@ The guard component can control whether the component can be displayed according
 
 | Property | Description | Type | Default |
 | :----| :---- | :---- | :---- |
-| authority | Current Requirement Permissions | string/Promise/() => Promise | null |
-| allAuthority | all permission |  string/string[] ｜ null |
+| target | Current Requirement Permissions | string/Promise/() => Promise | null |
+| has | all permission |  string/string[] ｜ null |
 | errComponent | Display component on error | ReactComponent | null |
 | loadingComponent | Display component on load | ReactComponent | null |
 
@@ -44,42 +44,42 @@ import {ReactGuards} from 'react-guards'
 
 ```jsx
 // none
-<ReactGuards authority='213' allAuthority='22'>
+<ReactGuards target='213' has='22'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards authority='213' allAuthority='22,213'>
+<ReactGuards target='213' has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // none
-<ReactGuards authority='213' allAuthority={['22']}>
+<ReactGuards target='213' has={['22']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards authority='213' allAuthority={['22', '213']}>
+<ReactGuards target='213' has={['22', '213']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards authority={Promise.resolve(true)} allAuthority='22,213'>
+<ReactGuards target={Promise.resolve(true)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards authority={(allAuthority) => Promise.resolve(true)} allAuthority='22,213'>
+<ReactGuards target={(has) => Promise.resolve(true)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>

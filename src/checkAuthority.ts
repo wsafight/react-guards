@@ -1,45 +1,57 @@
 
-
-export type IAuthority =
-  undefined |
+type TargetVal = undefined |
   string |
-  Promise<boolean> |
-  ((authority?: string | string[]) => IAuthority)
+  string[] |
+  Promise<boolean>
+
+type TargetFun = (has?: string | string[]) => TargetVal
+
+export type ITarget = undefined | TargetVal | TargetFun
 
 export interface CheckAuthorityParams {
-  authority?: IAuthority
-  allAuthority?: string | string[]
+  target?: ITarget
+  has?: string | string[]
 }
 
 export const checkAuthority = async (
-  { authority, allAuthority }: CheckAuthorityParams
+  { target, has }: CheckAuthorityParams
 ): Promise<boolean> => {
-  if (!authority) {
+  if (!target) {
     return true
   }
 
-  if (Array.isArray(authority) && authority.length === 0) {
+  if (Array.isArray(has) && has.length === 0) {
     return false
   }
 
-  if (typeof authority === 'string') {
-    if (!allAuthority) {
-      return true
+  if (typeof target === 'string') {
+    if (!has) {
+      return false
     }
-    if (Array.isArray(allAuthority)) {
-      return allAuthority.some(item => item === authority)
+    if (Array.isArray(has)) {
+      return has.some(item => item === target)
     }
-    return allAuthority.includes(authority)
+    return has.includes(target)
+  }
+
+  if (Array.isArray(target)) {
+    if (!has) {
+      return false
+    }
+    if (Array.isArray(has)) {
+      return has.some(item => target.includes(item))
+    }
+    return target.includes(has)
   }
 
 
-  if (authority instanceof Promise) {
-    return authority;
+  if (target instanceof Promise) {
+    return target;
   }
 
-  if (typeof authority === 'function') {
-    const result = await authority(allAuthority)
-    return !!result;
+  if (typeof target === 'function') {
+    const result = await target(has)
+    return !!result
   }
-  return false;
+  return false
 }

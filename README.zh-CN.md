@@ -8,8 +8,8 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | :----| :---- | :---- | :---- |
-| authority | 当前需求权限 | string/Promise/() => Promise | null |
-| allAuthority | 自己权限 |  string/string[] ｜ null |
+| target | 当前需求权限 | string[]/string/Promise/() => Promise | null |
+| has | 自己权限 |  string/string[] ｜ null |
 | errComponent | 错误时展示组件 | ReactComponent | null |
 | loadingComponent | 加载时展示组件 | ReactComponent | null |
 
@@ -40,49 +40,49 @@ import {ReactGuards} from 'react-guards'
 
 ```jsx
 // 不展示
-<ReactGuards authority='213' allAuthority='22'>
+<ReactGuards target='213' has='22'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 展示
-<ReactGuards authority='213' allAuthority='22,213'>
+<ReactGuards target='213' has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 不展示
-<ReactGuards authority='213' allAuthority={['22']}>
+<ReactGuards target='213' has={['22']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 展示
-<ReactGuards authority='213' allAuthority={['22', '213']}>
+<ReactGuards target='213' has={['22', '213']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 不展示
-<ReactGuards authority={Promise.resolve(true)} allAuthority='22,213'>
+<ReactGuards target={Promise.resolve(true)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 展示
-<ReactGuards authority={Promise.resolve(true)} allAuthority='22,213'>
+<ReactGuards target={Promise.resolve(true)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // 展示
-<ReactGuards authority={(allAuthority) => Promise.resolve(true)} allAuthority='22,213'>
+<ReactGuards target={(has) => Promise.resolve(true)} has='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
