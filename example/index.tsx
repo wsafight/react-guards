@@ -10,7 +10,7 @@ import {
 const waitThenError = (): Promise<boolean> => {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve(false)
+      resolve(true)
     }, 2000);
   })
 }

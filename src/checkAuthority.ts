@@ -25,47 +25,63 @@ export const setGlobalCurrent = (current: string | string[]) => {
   globalCurrent = current
 }
 
-export const checkAuthority = async (
+export const checkAuthority = (
   { target, current }: CheckAuthorityParams
-): Promise<boolean> => {
+): Promise<boolean> => new Promise(resolve => {
   if (!target) {
-    return true
+    resolve(true)
+    return
   }
 
   if (target instanceof Promise) {
-    return target
+    resolve(target)
+    return
   }
-  
+
   const finalCurrent: string | string[] | undefined = current || globalCurrent;
 
   if (typeof target === 'function') {
-    const result = await target(finalCurrent)
-    return !!result
+    const result = target(finalCurrent)
+
+    if (result instanceof Promise) {
+      resolve(result.then(Boolean))
+      return
+    }
+
+    resolve(!!result)
+    return
   }
 
   if (Array.isArray(finalCurrent) && finalCurrent.length === 0) {
-    return false
+    resolve(false)
+    return
   }
 
   if (typeof target === 'string') {
     if (!finalCurrent) {
-      return false
+      resolve(false)
+      return
     }
     if (Array.isArray(finalCurrent)) {
-      return finalCurrent.some(item => item === target)
+      resolve(finalCurrent.some(item => item === target))
+      return
     }
-    return finalCurrent.includes(target)
+    resolve(finalCurrent.includes(target))
+    return
   }
 
   if (Array.isArray(target)) {
     if (!finalCurrent) {
-      return false
+      resolve(false)
+      return
     }
     if (Array.isArray(finalCurrent)) {
-      return finalCurrent.some(item => target.includes(item))
+      resolve(finalCurrent.some(item => target.includes(item)))
+      return
     }
-    return target.includes(finalCurrent)
+    resolve(target.includes(finalCurrent))
+    return
   }
 
-  return false
-}
+  resolve(false)
+})
