@@ -4,6 +4,12 @@ Read this in other languages: [简体中文](https://github.com/wsafight/react-g
 
 [![Build Status](https://www.travis-ci.org/wsafight/react-guards.svg?branch=main)](https://www.travis-ci.org/wsafight/react-guards)
 [![NPM Version](https://badgen.net/npm/v/react-guards)](https://www.npmjs.com/package/react-guards)
+[![Downloads](https://img.shields.io/npm/dt/react-guards.svg)](https://www.npmjs.com/package/react-guards)
+[![license](https://img.shields.io/github/license/wsafight/react-guards.svg)](https://github.com/wsafight/react-guards/blob/master/license.md)
+[![minizipped](https://img.shields.io/bundlephobia/minzip/react-guards.svg)](
+https://bundlephobia.com/result?p=react-guards
+)
+
 
 The guard component can control whether the component can be displayed according to the permissions.
 

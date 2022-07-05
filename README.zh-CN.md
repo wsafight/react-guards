@@ -2,8 +2,14 @@
 
 [![Build Status](https://www.travis-ci.org/wsafight/react-guards.svg?branch=main)](https://www.travis-ci.org/wsafight/react-guards)
 [![NPM Version](https://badgen.net/npm/v/react-guards)](https://www.npmjs.com/package/react-guards)
+[![Downloads](https://img.shields.io/npm/dt/react-guards.svg)](https://www.npmjs.com/package/react-guards)
+[![license](https://img.shields.io/github/license/wsafight/react-guards.svg)](https://github.com/wsafight/react-guards/blob/master/license.md)
+[![minizipped](https://img.shields.io/bundlephobia/minzip/react-guards.svg)](
+https://bundlephobia.com/result?p=react-guards
+)
 
 守卫组件，可以根据权限控制组件是否能够展示。
+
 ## API
 
 ### 组件 API
