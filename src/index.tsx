@@ -27,8 +27,8 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
   }
 
   checkThenRender = () => {
-    const { target, has } = this.props
-    checkAuthority({ target, has }).then((res: boolean) => {
+    const { target, current } = this.props
+    checkAuthority({ target, current }).then((res: boolean) => {
       this.setState({ status: res ? 'success' : 'fail' })
     }).catch(() => {
       this.setState({ status: 'fail' })

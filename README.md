@@ -11,8 +11,8 @@ The guard component can control whether the component can be displayed according
 
 | Property | Description | Type | Default |
 | :----| :---- | :---- | :---- |
-| target | Current Requirement Permissions | string/Promise/() => Promise | null |
-| has | all permission |  string/string[] ｜ null |
+| target | target value | string｜string[]｜Promise｜() => Promise | null |
+| current | current value |  string｜string[] | null |
 | errComponent | Display component on error | ReactComponent | null |
 | loadingComponent | Display component on load | ReactComponent | null |
 
@@ -44,49 +44,49 @@ import {ReactGuards} from 'react-guards'
 
 ```jsx
 // none
-<ReactGuards target='213' has='22'>
+<ReactGuards target='213' current='22'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards target='213' has='22,213'>
+<ReactGuards target='213' current='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // none
-<ReactGuards target='213' has={['22']}>
+<ReactGuards target='213' current={['22']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards target='213' has={['22', '213']}>
+<ReactGuards target='213' current={['22', '213']}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // none
-<ReactGuards target={Promise.resolve(false)} has='22,213'>
+<ReactGuards target={Promise.resolve(false)} current='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards target={Promise.resolve(true)} has='22,213'>
+<ReactGuards target={Promise.resolve(true)} current='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
 </ReactGuards>
 
 // show
-<ReactGuards target={(has) => Promise.resolve(true)} has='22,213'>
+<ReactGuards target={(current) => Promise.resolve(true)} current='22,213'>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>

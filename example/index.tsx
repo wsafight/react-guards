@@ -6,7 +6,7 @@ import { ReactGuards, ReactGuardsProps, } from '../.';
 const App = () => {
   return (
     <div>
-      <ReactGuards target={() => Promise.resolve(false)} has='22,213'>
+      <ReactGuards target={() => Promise.resolve(false)} current='22,213'>
         213
         <div>324</div>
         <button onClick={() => alert(0)}>213213</button>

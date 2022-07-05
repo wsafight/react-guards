@@ -4,44 +4,44 @@ type TargetVal = undefined |
   string[] |
   Promise<boolean>
 
-type TargetFun = (has?: string | string[]) => TargetVal
+type TargetFun = (current?: string | string[]) => TargetVal
 
 export type ITarget = undefined | TargetVal | TargetFun
 
 export interface CheckAuthorityParams {
   target?: ITarget
-  has?: string | string[]
+  current?: string | string[]
 }
 
 export const checkAuthority = async (
-  { target, has }: CheckAuthorityParams
+  { target, current }: CheckAuthorityParams
 ): Promise<boolean> => {
   if (!target) {
     return true
   }
 
-  if (Array.isArray(has) && has.length === 0) {
+  if (Array.isArray(current) && current.length === 0) {
     return false
   }
 
   if (typeof target === 'string') {
-    if (!has) {
+    if (!current) {
       return false
     }
-    if (Array.isArray(has)) {
-      return has.some(item => item === target)
+    if (Array.isArray(current)) {
+      return current.some(item => item === target)
     }
-    return has.includes(target)
+    return current.includes(target)
   }
 
   if (Array.isArray(target)) {
-    if (!has) {
+    if (!current) {
       return false
     }
-    if (Array.isArray(has)) {
-      return has.some(item => target.includes(item))
+    if (Array.isArray(current)) {
+      return current.some(item => target.includes(item))
     }
-    return target.includes(has)
+    return target.includes(current)
   }
 
 
@@ -50,7 +50,7 @@ export const checkAuthority = async (
   }
 
   if (typeof target === 'function') {
-    const result = await target(has)
+    const result = await target(current)
     return !!result
   }
   return false
