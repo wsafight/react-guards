@@ -13,6 +13,18 @@ export interface CheckAuthorityParams {
   current?: string | string[]
 }
 
+let globalCurrent: string | string[] | undefined
+
+export const setGlobalCurrent = (current: string | string[]) => {
+  if (!current) {
+    return
+  }
+  if (typeof current !== 'string' && !Array.isArray(current)) {
+    return
+  }
+  globalCurrent = current
+}
+
 export const checkAuthority = async (
   { target, current }: CheckAuthorityParams
 ): Promise<boolean> => {
@@ -20,38 +32,40 @@ export const checkAuthority = async (
     return true
   }
 
-  if (Array.isArray(current) && current.length === 0) {
+  if (target instanceof Promise) {
+    return target
+  }
+  
+  const finalCurrent: string | string[] | undefined = current || globalCurrent;
+
+  if (typeof target === 'function') {
+    const result = await target(finalCurrent)
+    return !!result
+  }
+
+  if (Array.isArray(finalCurrent) && finalCurrent.length === 0) {
     return false
   }
 
   if (typeof target === 'string') {
-    if (!current) {
+    if (!finalCurrent) {
       return false
     }
-    if (Array.isArray(current)) {
-      return current.some(item => item === target)
+    if (Array.isArray(finalCurrent)) {
+      return finalCurrent.some(item => item === target)
     }
-    return current.includes(target)
+    return finalCurrent.includes(target)
   }
 
   if (Array.isArray(target)) {
-    if (!current) {
+    if (!finalCurrent) {
       return false
     }
-    if (Array.isArray(current)) {
-      return current.some(item => target.includes(item))
+    if (Array.isArray(finalCurrent)) {
+      return finalCurrent.some(item => target.includes(item))
     }
-    return target.includes(current)
+    return target.includes(finalCurrent)
   }
 
-
-  if (target instanceof Promise) {
-    return target;
-  }
-
-  if (typeof target === 'function') {
-    const result = await target(current)
-    return !!result
-  }
   return false
 }

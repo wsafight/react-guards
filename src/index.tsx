@@ -3,7 +3,7 @@ import React, {
   ComponentClass,
   FunctionComponent
 } from 'react';
-import { checkAuthority, CheckAuthorityParams } from './checkAuthority';
+import { checkAuthority, CheckAuthorityParams, setGlobalCurrent } from './checkAuthority';
 
 type ReactComponent = ComponentClass | FunctionComponent
 
@@ -55,6 +55,7 @@ export {
   ReactGuards,
   checkAuthority,
   ReactGuardsProps,
+  setGlobalCurrent,
 }
 
 export default ReactGuards

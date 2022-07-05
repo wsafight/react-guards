@@ -9,6 +9,8 @@ The guard component can control whether the component can be displayed according
 
 ## API
 
+### Component API
+
 | Property | Description | Type | Default |
 | :----| :---- | :---- | :---- |
 | target | target value | string｜string[]｜Promise｜() => Promise | null |
@@ -16,6 +18,11 @@ The guard component can control whether the component can be displayed according
 | errComponent | Display component on error | ReactComponent | null |
 | loadingComponent | Display component on load | ReactComponent | null |
 
+### Function
+
+| Name  | Description | Type |
+| :----| :---- | :---- |
+|   setGlobalCurrent |  Set global current, do not pass current value by default use globalCurrent | (current: string ｜ string[]) =>  void | 
 
 ## Installation
 
@@ -42,7 +49,11 @@ import {ReactGuards} from 'react-guards'
 </ReactGuards>
 ```
 
+### Basic
+
 ```jsx
+import {ReactGuards} from 'react-guards'
+
 // none
 <ReactGuards target='213' current='22'>
     213
@@ -87,6 +98,45 @@ import {ReactGuards} from 'react-guards'
 
 // show
 <ReactGuards target={(current) => Promise.resolve(true)} current='22,213'>
+    213
+    <div>324</div>
+    <button onClick={() => alert(0)}>213213</button>
+</ReactGuards>
+```
+
+### Global current
+
+```jsx
+import { ReactGuards, setGlobalCurrent as setGlobalCurrentForReactGuard } from 'react-guards'
+
+setGlobalCurrentForReactGuard('22,213')
+
+// show
+<ReactGuards target='22'>
+    213
+    <div>324</div>
+    <button onClick={() => alert(0)}>213213</button>
+</ReactGuards>
+```
+
+### error and loading
+
+```jsx
+import { ReactGuards, setGlobalCurrent as setGlobalCurrentForReactGuard } from 'react-guards'
+
+const waitThenError = (): Promise<boolean> => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(false)
+    }, 2000);
+  })
+}
+
+const Load = () => <div>Loading</div>
+
+const Error = () => <div>Error</div>
+
+<ReactGuards target={waitThenError} errComponent={Error} loadingComponent={Load}>
     213
     <div>324</div>
     <button onClick={() => alert(0)}>213213</button>
