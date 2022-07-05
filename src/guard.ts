@@ -8,7 +8,7 @@ type TargetFun = (current?: string | string[]) => TargetVal
 
 export type ITarget = undefined | TargetVal | TargetFun
 
-export interface CheckAuthorityParams {
+export interface canPassGuardParams {
   target?: ITarget
   current?: string | string[]
 }
@@ -25,8 +25,8 @@ export const setGlobalCurrent = (current: string | string[]) => {
   globalCurrent = current
 }
 
-export const checkAuthority = (
-  { target, current }: CheckAuthorityParams
+export const canPassGuard = (
+  { target, current }: canPassGuardParams
 ): Promise<boolean> => new Promise(resolve => {
   if (!target) {
     resolve(true)

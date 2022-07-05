@@ -3,11 +3,11 @@ import React, {
   ComponentClass,
   FunctionComponent
 } from 'react';
-import { checkAuthority, CheckAuthorityParams, setGlobalCurrent } from './checkAuthority';
+import { canPassGuard, canPassGuardParams, setGlobalCurrent } from './guard';
 
 type ReactComponent = ComponentClass | FunctionComponent
 
-interface ReactGuardsProps extends CheckAuthorityParams {
+interface ReactGuardsProps extends canPassGuardParams {
   errComponent?: ReactComponent
   loadingComponent?: ReactComponent
   children?: any
@@ -28,7 +28,7 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
 
   checkThenRender = () => {
     const { target, current } = this.props
-    checkAuthority({ target, current }).then((res: boolean) => {
+    canPassGuard({ target, current }).then((res: boolean) => {
       this.setState({ status: res ? 'success' : 'fail' })
     }).catch(() => {
       this.setState({ status: 'fail' })
@@ -53,7 +53,7 @@ class ReactGuards extends Component<ReactGuardsProps, ReactGuardsState> {
 
 export {
   ReactGuards,
-  checkAuthority,
+  canPassGuard,
   ReactGuardsProps,
   setGlobalCurrent,
 }

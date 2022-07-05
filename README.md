@@ -29,6 +29,7 @@ The guard component can control whether the component can be displayed according
 | Name  | Description | Type |
 | :----| :---- | :---- |
 |   setGlobalCurrent |  Set global current, do not pass current value by default use globalCurrent | (current: string ｜ string[]) =>  void | 
+|   canPassGuard | Determine whether it can pass the guard based on the passed data | ({target, current}) => Promise<boolean> | 
 
 ## Installation
 

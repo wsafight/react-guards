@@ -26,7 +26,7 @@ https://bundlephobia.com/result?p=react-guards
 | 名称  | 描述 | 类型 |
 | :----| :---- | :---- |
 |   setGlobalCurrent |  设置全局 current，不传递 current 值默认使用 globalCurrent | (current: string ｜ string[]) =>  void | 
-
+|   canPassGuard | 根据传递数据判断是否可以通过守卫 | ({target, current}) => Promise<boolean> | 
 ## 安装
 
 ```bash
