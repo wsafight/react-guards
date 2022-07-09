@@ -20,7 +20,7 @@ The guard component can control whether the component can be displayed according
 | Property | Description | Type | Default |
 | :----| :---- | :---- | :---- |
 | target | target value | string｜string[]｜Promise｜() => Promise | null |
-| current | current value |  string｜string[] | null |
+| current | current value |  string｜string[]｜'*' | null |
 | errComponent | Display component on error | ReactComponent | null |
 | loadingComponent | Display component on load | ReactComponent | null |
 

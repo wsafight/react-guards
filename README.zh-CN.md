@@ -17,7 +17,7 @@ https://bundlephobia.com/result?p=react-guards
 | 参数 | 说明 | 类型 | 默认值 |
 | :----| :---- | :---- | :---- |
 | target | 目标值 | string｜string[]｜Promise｜() => Promise | null |
-| current | 当前值 |   string｜string[] | null |
+| current | 当前值 |   string｜string[]｜'*' | null |
 | errComponent | 错误时展示组件 | ReactComponent | null |
 | loadingComponent | 加载时展示组件 | ReactComponent | null |
 

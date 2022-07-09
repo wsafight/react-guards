@@ -52,6 +52,11 @@ export const canPassGuard = (
     return
   }
 
+  if (finalCurrent === '*') {
+    resolve(true)
+    return
+  }
+
   if (Array.isArray(finalCurrent) && finalCurrent.length === 0) {
     resolve(false)
     return
