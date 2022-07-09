@@ -9,6 +9,11 @@
     "dist",
     "src"
   ],
+  "keywords": [
+    "react",
+    "guard",
+    "component"
+  ],
   "engines": {
     "node": ">=10"
   },
