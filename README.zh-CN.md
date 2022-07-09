@@ -57,6 +57,13 @@ import {ReactGuards} from 'react-guards'
 ```jsx
 import {ReactGuards} from 'react-guards'
 
+// 展示
+<ReactGuards target='213' current='*'>
+    213
+    <div>324</div>
+    <button onClick={() => alert(0)}>213213</button>
+</ReactGuards>
+
 // 不展示
 <ReactGuards target='213' current='22'>
     213
